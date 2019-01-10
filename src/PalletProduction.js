@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import './App.css';
-
 class PalletProduction extends Component {
   state = {
     cookie: "",
-    palletProduced: null
   }
 
   handleInputChange = (e) => {
@@ -19,19 +16,15 @@ class PalletProduction extends Component {
     e.preventDefault();
     if (this.isFormValid()) {
       const cookie = this.state.cookie
-      let url = 'http://localhost:8888/create-pallet/' + cookie;
-      axios.post(url, {})
-        .then(response => {
-          console.log(response);
-          if (response.data.id) {
-            this.setState({
-              palletProduced: {
-                cookie: cookie,
-                id: response.data.id
-              }
-            })
+      axios.post('create-pallet/' + cookie, {})
+        .then(res => {
+          console.log(res);
+          if (res.data.id) {
+            const message = "A pallet of " + cookie
+              + " was produced with id " + res.data.id;
+            this.props.setStatus(message)
           } else {
-            alert('An error occured: ' + response.data.errorMessage
+            alert('An error occured: ' + res.data.errorMessage
               + '. See console for more info.');
           }
           this.props.refresh();
@@ -47,19 +40,6 @@ class PalletProduction extends Component {
   isFormValid = () => this.state.cookie.length > 0;
 
   render() {
-    let palletProducedInfo = null;
-    if (this.state.palletProduced) {
-      palletProducedInfo = (
-        <p>
-          A pallet of <b>{this.state.palletProduced.cookie}</b> was
-          produced with ID <b>{this.state.palletProduced.id}</b>.
-          <button onClick={() => this.setState({palletProduced: null})}>
-            Close
-          </button>
-        </p>
-      )
-    }
-
     let submitButton = null;
     if (this.isFormValid()) {
       submitButton = <input type="submit" value="Produce!"/>;
@@ -68,7 +48,6 @@ class PalletProduction extends Component {
     }
     return (
       <div>
-        {palletProducedInfo}
         <form onSubmit={this.handleSubmit}>
           <b>Cookie:</b>
           <select
