@@ -15,6 +15,7 @@ class App extends Component {
   state = {
     cookies: [],
     pallets: [],
+    palletsFilter: {},
     disconnected: false,
     status: ""
   }
@@ -32,7 +33,15 @@ class App extends Component {
         console.log(error);
         this.setState({disconnected: true})
       });
-    axios.get("pallets")
+    this.fetchPallets(this.state.palletsFilter);
+  }
+
+  fetchPallets = (filter) => {
+    let params = {}
+    Object.keys(filter)
+      .filter(k => filter[k].length > 0)
+      .forEach(k => params[k] = filter[k])
+    axios.get("pallets", {params: params})
       .then(res => {
         this.setState({ pallets: res.data.pallets });
       })
@@ -46,6 +55,11 @@ class App extends Component {
     this.setState({status: message});
   }
 
+  setPalletsFilter = (filter) => {
+    this.setState({palletsFilter: filter});
+    this.fetchPallets(filter);
+  }
+
   mainArea = () => (
     <div>
       <Paper className={this.props.classes.PalletProductionPaper}>
@@ -55,7 +69,9 @@ class App extends Component {
           setStatus={this.setStatus} />
       </Paper>
       <SimpleTable
-        pallets={this.state.pallets} />
+        cookies={this.state.cookies}
+        pallets={this.state.pallets}
+        palletsFilter={this.setPalletsFilter}/>
       <Reset
         refresh={this.refresh}
         setStatus={this.setStatus} />

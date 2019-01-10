@@ -52,6 +52,7 @@ class PalletProduction extends Component {
           justify="flex-start"
           alignItems="flex-end">
           <TextField
+            style={{minWidth: "140px"}}
             id="cookie"
             select
             label="Select Cookie"
