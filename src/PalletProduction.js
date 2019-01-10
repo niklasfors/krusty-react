@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+
 class PalletProduction extends Component {
   state = {
     cookie: "",
@@ -30,7 +34,7 @@ class PalletProduction extends Component {
           this.props.refresh();
         })
         .catch(error => {
-          alert('An error occured. See console.');
+          alert('An error occured. See console for more info.');
           console.log(error);
         });
       this.setState({cookie: ""});
@@ -40,28 +44,37 @@ class PalletProduction extends Component {
   isFormValid = () => this.state.cookie.length > 0;
 
   render() {
-    let submitButton = null;
-    if (this.isFormValid()) {
-      submitButton = <input type="submit" value="Produce!"/>;
-    } else {
-      submitButton = <input type="submit" value="Produce!" disabled/>;
-    }
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <b>Cookie:</b>
-          <select
-              name="cookie"
-              value={this.state.cookie}
-              onChange={this.handleInputChange}>
-            <option value="">-</option>
+      <form>
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-end">
+          <TextField
+            id="cookie"
+            select
+            label="Select Cookie"
+            value={this.state.cookie}
+            onChange={this.handleInputChange}
+            name="cookie"
+            SelectProps={{
+              native: true
+            }}>
+            <option value=""></option>
             {this.props.cookies.map(c =>
               <option key={c.name} value={c.name}>{c.name}</option>
             )}
-          </select>
-          {submitButton}
-        </form>
-      </div>
+          </TextField>
+          <Button
+              style={{marginLeft: "10px"}}
+              variant="contained"
+              onClick={this.handleSubmit}
+              disabled={!this.isFormValid()}>
+            Produce pallet!
+          </Button>
+        </Grid>
+      </form>
     );
   }
 }

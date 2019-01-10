@@ -48,7 +48,7 @@ class App extends Component {
 
   mainArea = () => (
     <div>
-      <Paper className={this.props.classes.MyPaper}>
+      <Paper className={this.props.classes.PalletProductionPaper}>
         <PalletProduction
           cookies={this.state.cookies}
           refresh={this.refresh}
@@ -76,7 +76,7 @@ class App extends Component {
 
     return (
       <div>
-        <Paper className={this.props.classes.MyPaper}>
+        <Paper className={this.props.classes.StatusPaper}>
           <div>
             <b>Status:</b> {statusMessage}
           </div>
@@ -89,9 +89,14 @@ class App extends Component {
 }
 
 const styles = theme => ({
-  MyPaper: {
+  StatusPaper: {
     padding: "10px",
     marginBottom: "5px"
+  },
+  PalletProductionPaper: {
+    paddingLeft: "10px",
+    paddingTop: "4px",
+    paddingBottom: "10px"
   }
 });
 
