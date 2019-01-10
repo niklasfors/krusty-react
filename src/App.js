@@ -4,6 +4,12 @@ import axios from 'axios';
 import './App.css';
 import PalletProduction from './PalletProduction';
 import Reset from './Reset';
+import SimpleTable from './SimpleTable'
+
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 class App extends Component {
   state = {
@@ -42,15 +48,14 @@ class App extends Component {
 
   mainArea = () => (
     <div>
-      <PalletProduction
-        cookies={this.state.cookies}
-        refresh={this.refresh}
-        setStatus={this.setStatus} />
-      <ul>
-        {this.state.pallets.map(c =>
-          <li key={c.id}>{c.cookie}</li>
-        )}
-      </ul>
+      <Paper className={this.props.classes.MyPaper}>
+        <PalletProduction
+          cookies={this.state.cookies}
+          refresh={this.refresh}
+          setStatus={this.setStatus} />
+      </Paper>
+      <SimpleTable
+        pallets={this.state.pallets} />
       <Reset
         refresh={this.refresh}
         setStatus={this.setStatus} />
@@ -71,11 +76,11 @@ class App extends Component {
 
     return (
       <div>
-        <div>
-          <p>
+        <Paper className={this.props.classes.MyPaper}>
+          <div>
             <b>Status:</b> {statusMessage}
-          </p>
-        </div>
+          </div>
+        </Paper>
         {main}
       </div>
     );
@@ -83,4 +88,11 @@ class App extends Component {
 
 }
 
-export default App;
+const styles = theme => ({
+  MyPaper: {
+    padding: "10px",
+    marginBottom: "5px"
+  }
+});
+
+export default withStyles(styles)(App);
