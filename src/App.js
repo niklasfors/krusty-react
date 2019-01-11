@@ -4,12 +4,10 @@ import axios from 'axios';
 import './App.css';
 import PalletProduction from './PalletProduction';
 import Reset from './Reset';
-import SimpleTable from './SimpleTable'
+import PalletTable from './PalletTable'
 
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 
 class App extends Component {
   state = {
@@ -81,7 +79,7 @@ class App extends Component {
           refresh={this.refresh}
           setStatus={this.setStatus} />
       </Paper>
-      <SimpleTable
+      <PalletTable
         cookies={this.state.cookies}
         pallets={this.state.pallets}
         palletsFilter={this.setPalletsFilter}/>
