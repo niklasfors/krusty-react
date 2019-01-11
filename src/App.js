@@ -25,15 +25,23 @@ class App extends Component {
   }
 
   refresh = () => {
+    this.fetchCookies();
+    this.fetchPallets(this.state.palletsFilter);
+  }
+
+  fetchCookies = () => {
     axios.get("cookies")
       .then(res => {
-        this.setState({ cookies: res.data.cookies });
+        if (res.data && res.data.cookies) {
+          this.setState({ cookies: res.data.cookies });
+        } else {
+          this.setState({ status: "Couldn't fetch cookies from REST server"});
+        }
       })
       .catch(error => {
         console.log(error);
         this.setState({disconnected: true})
       });
-    this.fetchPallets(this.state.palletsFilter);
   }
 
   fetchPallets = (filter) => {
@@ -43,7 +51,12 @@ class App extends Component {
       .forEach(k => params[k] = filter[k])
     axios.get("pallets", {params: params})
       .then(res => {
-        this.setState({ pallets: res.data.pallets });
+        console.log(res);
+        if (res.data && res.data.pallets) {
+          this.setState({ pallets: res.data.pallets });
+        } else {
+          this.setState({ status: "Couldn't fetch pallets from REST server"});
+        }
       })
       .catch(error => {
         console.log(error);
@@ -75,7 +88,8 @@ class App extends Component {
       <Reset
         refresh={this.refresh}
         setStatus={this.setStatus} />
-    </div>)
+    </div>
+  )
 
   render() {
     let statusMessage = this.state.status;
