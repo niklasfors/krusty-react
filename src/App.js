@@ -103,7 +103,8 @@ class App extends Component {
     }
 
     return (
-      <div>
+      <div className="App">
+        <h1>Krusty</h1>
         <Paper className={this.props.classes.StatusPaper}>
           <div>
             <b>Status:</b> {statusMessage}

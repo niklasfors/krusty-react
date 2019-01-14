@@ -1,3 +1,14 @@
+div.App {
+	width: 850px;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 850px) {
+  div.App {
+    width: 100%;
+  }
+}
+
 body {
   margin: 10px;
   padding: 0;
