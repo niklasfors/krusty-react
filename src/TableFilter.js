@@ -100,7 +100,7 @@ class TableFilter extends Component {
                 style={{marginLeft: "10px"}}
                 variant="contained"
                 onClick={this.handleSubmit}>
-              Filter Pallets
+              Filter
             </Button>
             <Button
                 style={{marginLeft: "10px"}}

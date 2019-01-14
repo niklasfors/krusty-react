@@ -10,16 +10,20 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
     overflowX: 'auto',
   },
   table: {
-    minWidth: 700,
+    minWidth: 400,
   },
+  header: {
+    marginLeft: '10px',
+    marginTop: '10px'
+  }
 });
 
 function PalletTable(props) {
@@ -27,6 +31,9 @@ function PalletTable(props) {
 
   return (
     <Paper className={classes.root}>
+      <Typography className={classes.header} color="textSecondary" variant="button" gutterBottom>
+        Produced Pallets
+      </Typography>
       <TableFilter
         cookies={props.cookies}
         palletsFilter={props.palletsFilter}/>

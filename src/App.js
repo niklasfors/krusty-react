@@ -5,6 +5,7 @@ import './App.css';
 import PalletProduction from './PalletProduction';
 import Reset from './Reset';
 import PalletTable from './PalletTable'
+import Typography from '@material-ui/core/Typography';
 
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -74,6 +75,9 @@ class App extends Component {
   mainArea = () => (
     <div>
       <Paper className={this.props.classes.PalletProductionPaper}>
+        <Typography color="textSecondary" variant="button" gutterBottom>
+          Production
+        </Typography>
         <PalletProduction
           cookies={this.state.cookies}
           refresh={this.refresh}
@@ -120,12 +124,11 @@ class App extends Component {
 const styles = theme => ({
   StatusPaper: {
     padding: "10px",
-    marginBottom: "5px"
+    marginBottom: "15px"
   },
   PalletProductionPaper: {
-    paddingLeft: "10px",
-    paddingTop: "4px",
-    paddingBottom: "10px"
+    padding: "10px",
+    marginBottom: "15px"
   }
 });
 

@@ -1,9 +1,9 @@
 div.App {
-	width: 850px;
+	width: 800px;
 	margin: 0 auto;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 800px) {
   div.App {
     width: 100%;
   }
