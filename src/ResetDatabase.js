@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-class Reset extends Component {
+class ResetDatabase extends Component {
   state = {
     open: false
   }
@@ -65,4 +65,4 @@ class Reset extends Component {
   }
 }
 
-export default Reset;
+export default ResetDatabase;

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import './App.css';
-import PalletProduction from './PalletProduction';
-import Reset from './Reset';
-import PalletTable from './PalletTable'
-import Typography from '@material-ui/core/Typography';
-
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
+import './App.css';
+import PalletProduction from './PalletProduction';
+import PalletTable from './PalletTable'
+import ResetDatabase from './ResetDatabase';
 
 class App extends Component {
   state = {
@@ -44,10 +44,12 @@ class App extends Component {
   }
 
   fetchPallets = (filter) => {
+    // Only apply filters that are non-empty
     let params = {}
     Object.keys(filter)
       .filter(k => filter[k].length > 0)
       .forEach(k => params[k] = filter[k])
+
     axios.get("pallets", {params: params})
       .then(res => {
         console.log(res);
@@ -74,20 +76,15 @@ class App extends Component {
 
   mainArea = () => (
     <div>
-      <Paper className={this.props.classes.PalletProductionPaper}>
-        <Typography color="textSecondary" variant="button" gutterBottom>
-          Production
-        </Typography>
-        <PalletProduction
-          cookies={this.state.cookies}
-          refresh={this.refresh}
-          setStatus={this.setStatus} />
-      </Paper>
+      <PalletProduction
+        cookies={this.state.cookies}
+        refresh={this.refresh}
+        setStatus={this.setStatus} />
       <PalletTable
         cookies={this.state.cookies}
         pallets={this.state.pallets}
-        palletsFilter={this.setPalletsFilter}/>
-      <Reset
+        palletsFilter={this.setPalletsFilter} />
+      <ResetDatabase
         refresh={this.refresh}
         setStatus={this.setStatus} />
     </div>
@@ -108,12 +105,16 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Krusty</h1>
+        <Typography variant="h3" gutterBottom>
+          Krusty
+        </Typography>
+
         <Paper className={this.props.classes.StatusPaper}>
           <div>
             <b>Status:</b> {statusMessage}
           </div>
         </Paper>
+
         {main}
       </div>
     );
@@ -123,10 +124,6 @@ class App extends Component {
 
 const styles = theme => ({
   StatusPaper: {
-    padding: "10px",
-    marginBottom: "15px"
-  },
-  PalletProductionPaper: {
     padding: "10px",
     marginBottom: "15px"
   }

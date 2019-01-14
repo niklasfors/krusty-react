@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TableFilter from './TableFilter'
+import PalletTableFilter from './PalletTableFilter'
 
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -34,9 +34,9 @@ function PalletTable(props) {
       <Typography className={classes.header} color="textSecondary" variant="button" gutterBottom>
         Produced Pallets
       </Typography>
-      <TableFilter
+      <PalletTableFilter
         cookies={props.cookies}
-        palletsFilter={props.palletsFilter}/>
+        palletsFilter={props.palletsFilter} />
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
