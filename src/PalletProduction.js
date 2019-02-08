@@ -23,7 +23,8 @@ class PalletProduction extends Component {
     e.preventDefault();
     if (this.isFormValid()) {
       const cookie = this.state.cookie
-      axios.post('create-pallet/' + cookie, {})
+      const params = {cookie: cookie}
+      axios.post('pallets', null, {params: params})
         .then(res => {
           console.log(res);
           if (res.data.id) {
