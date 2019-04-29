@@ -32,7 +32,7 @@ class PalletProduction extends Component {
               + " was produced with id " + res.data.id;
             this.props.setStatus(message)
           } else {
-            alert('An error occured: ' + res.data.errorMessage
+            alert('An error occured: ' + res.data.status
               + '. See console for more info.');
           }
           this.props.refresh();
